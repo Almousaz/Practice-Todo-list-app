@@ -6,7 +6,7 @@ function addTask() {
     alert("You must write something");
   } else {
     let li = document.createElement("li");
-    li.innerHTML = inputBox.value ;
+    li.innerHTML = inputBox.value;
     lsitContainer.appendChild(li);
     let span = document.createElement("span");
     span.innerHTML = "\u00d7";
@@ -16,24 +16,25 @@ function addTask() {
   saveData();
 }
 
-lsitContainer.addEventListener("click",function(e){
-    if(e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
-        saveData();
-        
+lsitContainer.addEventListener(
+  "click",
+  function (e) {
+    if (e.target.tagName === "LI") {
+      e.target.classList.toggle("checked");
+      saveData();
+    } else if (e.target.tagName === "SPAN") {
+      e.target.parentElement.remove();
+      saveData();
     }
-    else if(e.target.tagName === "SPAN"){
-        e.target.parentElement.remove();
-        saveData();
-        
-    }
-},false);
+  },
+  false
+);
 
-function saveData(){
-    localStorage.setItem("data", lsitContainer.innerHTML);
+function saveData() {
+  localStorage.setItem("data", lsitContainer.innerHTML);
 }
 
-function showTask(){
-    lsitContainer.innerHTML = localStorage.getItem("data");
+function showTask() {
+  lsitContainer.innerHTML = localStorage.getItem("data");
 }
 showTask();
